@@ -6,6 +6,36 @@
     <title>Document</title>
 </head>
 <body>
+
+ 
+
+    <!-- Load jQuery and Moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  
+  <script type="text/javascript">
+
+var queryURL = "https://api.covidtracking.com/v1/states/oh/current.json";
+
+
+$.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+
+// Log the queryURL
+console.log(queryURL);
+
+});
+
+
+
+
+
+  </script>
+
+
+
     
 </body>
 </html>
