@@ -6,8 +6,25 @@
     <title>Document</title>
 </head>
 <body>
+    <form id="covid-form"></form>
+        <label for="name">Search for a State: </label><br>
+        <input id="state-input" type="text" name="State" placeholder="Enter 2 letters" > 
+        
+        <input id="add-state" type="submit" value="Search">
+    </form>
+
+    <!-- Retrieved data will be dumped here -->
+    <div class="date"></div>
+    <div class="state"></div>
+    <div class="positive"></div>
+    <div class="death"></div>
+    <div class="positiveIncrease"></div>
+    <div class="active"></div>
+    <div class="recovered"></div>
+
 
  
+
 
     <!-- Load jQuery and Moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -15,16 +32,28 @@
   
   <script type="text/javascript">
 
-var queryURL = "https://api.covidtracking.com/v1/states/oh/current.json";
+    var queryURL = "https://api.covidtracking.com/v1/states/oh/current.json";
 
 
-$.ajax({
+    $.ajax({
       url: queryURL,
       method: "GET"
     }).then(function(response) {
 
-// Log the queryURL
-console.log(queryURL);
+    var activekeep = parseInt(response.positive)-parseInt(response.recovered)-parseInt(response.death);
+    console.log("ActiveKeep = " + activekeep);
+    $(".state").html("<h1>" + response.state + " COVID Details " + response.date + "</h1>");
+    $(".positive").text("Total Cases: " + response.positive);
+    $(".death").text("Total Deaths: " + response.death);
+    $(".positiveIncrease").text("New Cases: " + response.positiveIncrease);
+    $(".active").text("Active Cases: " + activekeep);
+    $(".recovered").text("Recovered: " + response.recovered);
+    
+    // Log the queryURL
+    console.log(queryURL);
+
+
+
 
 });
 
