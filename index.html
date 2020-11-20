@@ -31,13 +31,22 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   
   <script type="text/javascript">
+$("#add-state").on("click", function(event) {
+    // event.preventDefault() prevents the form from trying to submit itself.
+    
+    event.preventDefault();
 
-    var queryURL = "https://api.covidtracking.com/v1/states/oh/current.json";
+    // This line will grab the text from the input box
+    var stateInput = $("#state-input").val().trim();
+    console.log(stateInput);
+    // calling renderButtons which handles the processing of our array
+    //renderButtons();
+    var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput +  "/current.json";
 
 
     $.ajax({
-      url: queryURL,
-      method: "GET"
+    url: queryURL,
+    method: "GET"
     }).then(function(response) {
 
     var activekeep = parseInt(response.positive)-parseInt(response.recovered)-parseInt(response.death);
@@ -48,17 +57,12 @@
     $(".positiveIncrease").text("New Cases: " + response.positiveIncrease);
     $(".active").text("Active Cases: " + activekeep);
     $(".recovered").text("Recovered: " + response.recovered);
-    
+
     // Log the queryURL
     console.log(queryURL);
+    });
 
-
-
-
-});
-
-
-
+});           
 
 
   </script>
