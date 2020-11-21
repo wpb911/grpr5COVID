@@ -3,36 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <title>COVID Data</title>
 </head>
 <body>
+
+  <section id="search-section" class="section">
+    <div class="container">
     <form id="covid-form"></form>
         <label for="name">Search for a State: </label><br>
         <input id="state-input" type="text" name="State" placeholder="Enter 2 letters" > 
         
         <input id="add-state" type="submit" value="Search">
     </form>
+    </div>
+  </section>
 
-    <!-- Retrieved data will be dumped here -->
-    <div class="date"></div>
-    <div class="state"></div>
-    <div class="positive"></div>
-    <div class="death"></div>
-    <div class="positiveIncrease"></div>
-    <div class="active"></div>
-    <div class="recovered"></div>
+    <section id="state-section" class="section">
+       <div class="container">
+                <!-- Retrieved data will be dumped here -->
+          <div class="date"></div>
+          <div class="state"></div>
+          <div class="positive"></div>
+          <div class="death"></div>
+          <div class="positiveIncrease"></div>
+          <div class="active"></div>
+          <div class="recovered"></div>   
+       </div>
+    </section>
 
-    <br>
-    <!-- for the world -->
-    <!-- <div id = "worldData"></div> -->
-    <div class = "country" id="Australia" data-value= "AUS"></div>
-    <div class = "country" id="United States of America" data-value= "USA"></div>
-    <div class = "country" id="Canada" data-value= "CAN"></div>
-    <div class = "country" id="France" data-value= "FRA"></div>
-    <div class = "country" id="United Kingdom" data-value= "GBR"></div>
-
-
-    
+    <section id="world-section" class="section">
+       <div class="container">
+            <!-- HTML for the "COUNTRY data" part of the page goes here --> 
+                <!-- for the world -->
+                <!-- <div id = "worldData"></div> -->
+                <div class = "country" id="Australia" data-value= "AUS"></div>
+                <div class = "country" id="United States of America" data-value= "USA"></div>
+                <div class = "country" id="Canada" data-value= "CAN"></div>
+                <div class = "country" id="France" data-value= "FRA"></div>
+                <div class = "country" id="United Kingdom" data-value= "GBR"></div>
+       </div>
+    </section>
 
     <!-- Load jQuery and Moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
