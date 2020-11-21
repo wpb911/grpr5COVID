@@ -71,6 +71,8 @@ $("#add-state").on("click", function(event) {
     });
 
 });           
+
+
     // World part
     console.log(moment().format());
     function returnDate(){
@@ -86,26 +88,29 @@ $("#add-state").on("click", function(event) {
     var currentDate = returnDate();
     var countries = ["Australia", "United States of America","Canada","France","United Kingdom"]
     console.log(currentDate)
-    
 
 
     function showWorldData(){
       var allCountry= $(".country");
       allCountry.each(function(){
         var element = $(this);
+        // console.log(this)
         var countryCode = element.attr("data-value");
+        var countryName = element.attr("ID");
+        console.log(countryName);
         var queryURl = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+countryCode+"/" +currentDate;
 
         $.ajax({
           url:queryURl,
           method:"GET"
         }).then(function(response){
+          console.log(response);
           console.dir(response.stringencyData.confirmed)
           console.log(typeof response.stringencyData.confirmed)
           var totalNumber = response.stringencyData.confirmed;
           var totalConfirmed = $("<p>").text(totalNumber)
 
-          var a = $("<div></div>").text(`${totalNumber}`);
+          var a = $("<div></div>").text(`${countryName} total case : ${totalNumber}.`);
             console.log(a.get(0).textContent);
           element.append(a);
           
