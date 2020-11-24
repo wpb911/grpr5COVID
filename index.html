@@ -1,147 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <title>COVID Data</title>
 </head>
+
 <body>
 
-  <div class="container">
-  <section id="search-section" class="section">
     <div class="container">
-    <form id="covid-form"></form>
-        <label for="name">Search for a State: </label><br>
-        <input id="state-input" type="text" name="State" placeholder="Enter 2 letters" > 
-        <link rel="stylesheet" href="style.css"></link>
-        <input id="add-state" type="submit" value="Search">
-    </form>
-    </div>
-  </section>
+        <section id="search-section" class="section">
+            <div class="container">
+                <form id="covid-form"></form>
+                <label for="name">Search for a State: </label><br>
+                <input id="state-input" type="text" name="State" placeholder="Enter 2 letters">
+                <link rel="stylesheet" href="style.css">
+                </link>
+                <input id="add-state" type="submit" value="Search">
+                </form>
+            </div>
+        </section>
 
-    <section id="state-section" class="section">
-       <div class="container">
+        <section id="state-section" class="section">
+            <div class="container">
                 <!-- Retrieved data will be dumped here -->
-          <div class="date"></div>
-          <div class="state"></div>
-          <div class="positive"></div>
-          <div class="death"></div>
-          <div class="positiveIncrease"></div>
-          <div class="active"></div>
-          <div class="recovered"></div>   
-       </div>
-    </section>
+                <div class="date"></div>
+                <div class="state"></div>
+                <div class="positive"></div>
+                <div class="death"></div>
+                <div class="positiveIncrease"></div>
+                <div class="active"></div>
+                <div class="recovered"></div>
+            </div>
+        </section>
 
-    <section id="world-section" class="section">
-       <div class="container">
-            <!-- HTML for the "COUNTRY data" part of the page goes here --> 
+        <section id="world-section" class="section">
+            <div class="container">
+                <!-- HTML for the "COUNTRY data" part of the page goes here -->
                 <!-- for the world -->
                 <!-- <div id = "worldData"></div> -->
-                <div class = "country" id="Australia" data-value= "AUS"></div>
-                <div class = "country" id="United States of America" data-value= "USA"></div>
-                <div class = "country" id="Canada" data-value= "CAN"></div>
-                <div class = "country" id="France" data-value= "FRA"></div>
-                <div class = "country" id="United Kingdom" data-value= "GBR"></div>
-       </div>
-    </section>
+                <div class="country" id="United States of America" data-value="USA"></div>
+                <div class="country" id="Australia" data-value="AUS"></div>
+                <div class="country" id="Canada" data-value="CAN"></div>
+                <div class="country" id="France" data-value="FRA"></div>
+                <div class="country" id="United Kingdom" data-value="GBR"></div>
+            </div>
+        </section>
 
-  </div>
+    </div>
 
     <!-- Load jQuery and Moment.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  
-  <script type="text/javascript">
-$("#add-state").on("click", function(event) {
-    // event.preventDefault() prevents the form from trying to submit itself.
-    
-    event.preventDefault();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-    // This line will grab the text from the input box
-    var stateInput = $("#state-input").val().trim();
-    console.log(stateInput);
-    // calling renderButtons which handles the processing of our array
-    //renderButtons();
-    var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput +  "/current.json";
+    <script type="text/javascript">
+        $("#add-state").on("click", function (event) {
+            // event.preventDefault() prevents the form from trying to submit itself.
 
+            event.preventDefault();
 
-    $.ajax({
-    url: queryURL,
-    method: "GET"
-    }).then(function(response) {
-
-    var activekeep = parseInt(response.positive)-parseInt(response.recovered)-parseInt(response.death);
-    console.log("ActiveKeep = " + activekeep);
-    $(".state").html("<h1>" + response.state + " COVID Details " + response.date + "</h1>");
-    $(".positive").text("Total Cases: " + response.positive);
-    $(".death").text("Total Deaths: " + response.death);
-    $(".positiveIncrease").text("New Cases: " + response.positiveIncrease);
-    $(".active").text("Active Cases: " + activekeep);
-    $(".recovered").text("Recovered: " + response.recovered);
-
-    // Log the queryURL
-    console.log(queryURL);
-    });
-
-});           
+            // This line will grab the text from the input box
+            var stateInput = $("#state-input").val().trim();
+            console.log(stateInput);
+            // calling renderButtons which handles the processing of our array
+            //renderButtons();
+            var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput + "/current.json";
 
 
-    // World part
-    console.log(moment().format());
-    function returnDate(){
-      // var codeObject = {""}
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
 
-      var dateString = moment().format();
-      var currentDate = "";
-      for (let i = 0; i<dateString.indexOf("T"); i++){
-        currentDate+=dateString[i];
-      }
-      return currentDate;
-    }
-    var currentDate = returnDate();
-    var countries = ["Australia", "United States of America","Canada","France","United Kingdom"]
-    console.log(currentDate)
+                var activekeep = parseInt(response.positive) - parseInt(response.recovered) - parseInt(response.death);
+                console.log("ActiveKeep = " + activekeep);
+                $(".state").html("<h1>" + response.state + " COVID Details " + response.date + "</h1>");
+                $(".positive").text("Total Cases: " + response.positive);
+                $(".death").text("Total Deaths: " + response.death);
+                $(".positiveIncrease").text("New Cases: " + response.positiveIncrease);
+                $(".active").text("Active Cases: " + activekeep);
+                $(".recovered").text("Recovered: " + response.recovered);
 
+                // Log the queryURL
+                console.log(queryURL);
+            });
 
-    function showWorldData(){
-      var allCountry= $(".country");
-      allCountry.each(function(){
-        var element = $(this);
-        // console.log(this)
-        var countryCode = element.attr("data-value");
-        var countryName = element.attr("ID");
-        console.log(countryName);
-        var queryURl = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+countryCode+"/" +currentDate;
-
-        $.ajax({
-          url:queryURl,
-          method:"GET"
-        }).then(function(response){
-          console.log(response);
-          console.dir(response.stringencyData.confirmed)
-          console.log(typeof response.stringencyData.confirmed)
-          var totalNumber = response.stringencyData.confirmed;
-          var totalConfirmed = $("<p>").text(totalNumber)
-
-          var a = $("<div></div>").text(`${countryName} total case : ${totalNumber}.`);
-            console.log(a.get(0).textContent);
-          element.append(a);
-          
-        })
-        
-      })
-      // var queryURl = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+countries[0]+"/" +currentDate
+        });
 
 
-    }
-    showWorldData();
+        // World part
+        console.log(moment().format());
+        function returnDate() {
+            // var codeObject = {""}
+
+            var dateString = moment().format();
+            var currentDate = "";
+            for (let i = 0; i < dateString.indexOf("T"); i++) {
+                currentDate += dateString[i];
+            }
+            return currentDate;
+        }
+        var currentDate = returnDate();
+        var countries = ["United States of America", "Australia", "Canada", "France", "United Kingdom"]
+        var countryPopulation = [
+            {
+            country: "United States of America",
+            population: 331002651,
+            code:"USA"
+        },
+            {
+            country: "Australia",
+            population: 25499884,
+            code:"AUS"
+        },
+            {
+            country: "Canada",
+            population: 37742154,
+            code:"CAN"
+        },
+            {
+            country: "France",
+            population: 65273511,
+            code:"FRA"
+        },
+            {
+            country: "United Kingdom",
+            population: 67886011,
+            code:"GBR"
+        }
+    ];
+
+
+
+        // var countryPopulation = {
+        //     country:
+        //     {
+        //     name:"United States of America",
+        //     population: 331002651,
+        //     code:"USA"
+        // },
+        //     {
+        //     country: "Australia",
+        //     population: 25499884,
+        //     code:"AUS"
+        // },
+        //     {
+        //     country: "Canada",
+        //     population: 37742154,
+        //     code:"CAN"
+        // },
+        //     {
+        //     country: "France",
+        //     population: 65273511,
+        //     code:"FRA"
+        // },
+        //     {
+        //     country: "United Kingdom",
+        //     population: 67886011,
+        //     code:"GBR"
+        // }
+        // };
+        // var countryObject = [{ "Australia": "AUS" },]
+        console.log(currentDate)
+
+
+        function showWorldData() {
+            var allCountry = $(".country");
+            allCountry.each(function () {
+                //   allCountry.forEach(function(){
+                var element = $(this);
+                // console.log(this)
+                var countryCode = element.attr("data-value");
+                var countryName = element.attr("ID");
+                console.log(countryName);
+                var queryURl = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/" + countryCode + "/" + currentDate;
+
+                $.ajax({
+                    url: queryURl,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+                    console.dir(response.stringencyData.confirmed)
+                    console.log(typeof response.stringencyData.confirmed)
+
+                    // var totalConfirmed = $("<p></p>").text(`${countryName} total case : ${response.stringencyData.confirmed}.`);
+                    // var totalDeath = $("<p></p>").text(`${countryName} total death : ${response.stringencyData.death}.`);
+                    var totalConfirmed = $("<p></p>").text(`Total case : ${response.stringencyData.confirmed}.`);
+                    var totalPer10k = $("<p></p>").text(`Total case : ${response.stringencyData.confirmed}.`);
+                    var totalDeath = $("<p></p>").text(`Total death : ${response.stringencyData.deaths}.`);
+                    var totalDeathPer10K = $("<p></p>").text(`Total death : ${response.stringencyData.death}.`);
+
+                    element.append($("<h1>").text(countryName + ":"));
+                    element.append(totalConfirmed);
+                    element.append(totalDeath);
+
+                    element.append($("<br>"));
+
+
+                })
+
+            })
+            // var queryURl = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/"+countries[0]+"/" +currentDate
+
+
+        }
+        showWorldData();
 
 // https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/USA/2020-11-16
 
-  </script>
+    </script>
 
 
-    
+
 </body>
+
 </html>
