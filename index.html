@@ -120,9 +120,12 @@
 
             // This line will grab the text from the input box
             var stateInput = $("#states").val().trim();
-            console.log(stateInput);
-            // calling renderButtons which handles the processing of our array
-            //renderButtons();
+            console.log("The State Chosen: " + stateInput);
+
+            // Store selected state to local storage
+            localStorage.setItem("lastSelectedState", JSON.stringify(stateInput));
+
+            // Calling covidtracking API with the selected state 
             var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput + "/current.json";
 
 
