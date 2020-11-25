@@ -13,7 +13,7 @@
     <section id="search-section" class="section">
       <div class="container">
       <form id="covid-form"></form>
-          <label for="name">Search for a State: </label><br>
+          <label for="name">Select a State: </label><br>
           <!--States drop down-->
           <select id='states'>
               <option value="AK">Alaska</option>
@@ -74,7 +74,11 @@
     
             <!--<input id="state-input" type="text" name="State" placeholder="Enter 2 letters" > --> 
             <link rel="stylesheet" href="style.css"></link>
+         
+          <!-- Submit button will not be needed if jquery handler runs when select dropdown is updated     
             <input id="add-state" type="submit" value="Search">
+           -->  
+
         </form>
             </div>
         </section>
@@ -112,7 +116,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script type="text/javascript">
-        $("#add-state").on("click", function (event) {
+        $("#states").on("change", function (event) {
             // event.preventDefault() prevents the form from trying to submit itself.
 
             event.preventDefault();
