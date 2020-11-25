@@ -12,7 +12,8 @@
 
     <div class="container">
         <section id="search-section" class="section">
-            <div class="container">
+            <div class="columns">
+                <div class="column">
                 <form id="covid-form"></form>
                 <label for="name">Search for a State: </label><br>
                 <input id="state-input" type="text" name="State" placeholder="Enter 2 letters">
@@ -20,11 +21,13 @@
                 </link>
                 <input id="add-state" type="submit" value="Search">
                 </form>
+                </div>
             </div>
         </section>
 
         <section id="state-section" class="section">
-            <div class="container">
+            <div class="columns">
+                <div class="column box">
                 <!-- Retrieved data will be dumped here -->
                 <div class="date"></div>
                 <div class="state"></div>
@@ -35,20 +38,19 @@
                 <div class="recovered"></div>
             </div>
         </section>
-
         <section id="world-section" class="section">
-            <div class="container">
+           
+            <div class="columns">
                 <!-- HTML for the "COUNTRY data" part of the page goes here -->
                 <!-- for the world -->
                 <!-- <div id = "worldData"></div> -->
-                <div class="country" id="United States of America" data-value="USA"></div>
-                <div class="country" id="Australia" data-value="AUS"></div>
-                <div class="country" id="Canada" data-value="CAN"></div>
-                <div class="country" id="France" data-value="FRA"></div>
-                <div class="country" id="United Kingdom" data-value="GBR"></div>
+                <div class="country box column is-one-fifth" id="United States of America" data-value="USA"></div>
+                <div class="country box column is-one-fifth" id="Australia" data-value="AUS"></div>
+                <div class="country box column is-one-fifth" id="Canada" data-value="CAN"></div>
+                <div class="country box column is-one-fifth" id="France" data-value="FRA"></div>
+                <div class="country box column is-one-fifth" id="United Kingdom" data-value="GBR"></div>
             </div>
         </section>
-
     </div>
 
     <!-- Load jQuery and Moment.js -->
