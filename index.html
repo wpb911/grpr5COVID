@@ -112,6 +112,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script type="text/javascript">
+
+        $( window ).on( "load", firstCovid );
+        
+
+        function firstCovid() {
+            //set intial state to Ohio
+            let stateInput = "OH";
+            //load the last stored state from local storage 
+            let stateStore = JSON.parse(localStorage.getItem("lastSelectedState"));
+            //if there is a stored state use it to update the initial state 
+            if (stateStore !== null) {
+                stateInput = stateStore;
+            };
+            //Call covidtracking.com API with the State selected by the user 
+            var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput + "/current.json";
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+
+                var activekeep = parseInt(response.positive) - parseInt(response.recovered) - parseInt(response.death);
+                console.log("ActiveKeep = " + activekeep);
+                $(".state").html("<h1>" + response.state + " COVID Details " + response.date + "</h1>");
+                $(".positive").text("Total Cases: " + response.positive);
+                $(".death").text("Total Deaths: " + response.death);
+                $(".positiveIncrease").text("New Cases: " + response.positiveIncrease);
+                $(".active").text("Active Cases: " + activekeep);
+                $(".recovered").text("Recovered: " + response.recovered);
+                
+            });
+
+        };
+
+
+
+
+        
         $("#add-state").on("click", function (event) {
             // event.preventDefault() prevents the form from trying to submit itself.
 
@@ -120,10 +158,12 @@
             // This line will grab the text from the input box
             var stateInput = $("#states").val().trim();
             console.log(stateInput);
-            // calling renderButtons which handles the processing of our array
-            //renderButtons();
+            
+            //Store the last viewed State to localstorage
+            localStorage.setItem("lastSelectedState", JSON.stringify(stateInput));
+            
+            //Call covidtracking.com API with the State selected by the user 
             var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput + "/current.json";
-
 
             $.ajax({
                 url: queryURL,
@@ -264,7 +304,7 @@
         }
         showWorldData();
 
-// https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/USA/2020-11-16
+        // https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/USA/2020-11-16
 
     </script>
 
