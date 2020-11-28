@@ -9,7 +9,6 @@ Covid-19 Details include:
 * New Cases
 * Active Cases
 * Recovered
-*
 
 
 
@@ -24,9 +23,9 @@ Covid-19 Details include:
 ## Usage
 
 
-![Portfolio Image](https://github.com/wpb911/grpr5COVID/blob/main/image.png)
+![Covid-Tracker Image](https://github.com/wpb911/grpr5COVID/blob/main/image.png)
 
-Preview of the site is available here [Password-Generator](https://wpb911.github.io/grpr5COVID/).
+Preview of the site is available here [Covid-Tracker](https://wpb911.github.io/grpr5COVID/).
 
 
 ## Installation
