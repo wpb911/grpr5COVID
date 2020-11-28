@@ -98,11 +98,11 @@
                 <!-- HTML for the "COUNTRY data" part of the page goes here -->
                 <!-- for the world -->
                 <!-- <div id = "worldData"></div> -->
-                <div class="country box column is-one-fifth" id="United States of America" data-value="USA"></div>
-                <div class="country box column is-one-fifth" id="Australia" data-value="AUS"></div>
-                <div class="country box column is-one-fifth" id="Canada" data-value="CAN"></div>
-                <div class="country box column is-one-fifth" id="France" data-value="FRA"></div>
-                <div class="country box column is-one-fifth" id="United Kingdom" data-value="GBR"></div>
+                <div class="country box column is-one-fifth" population= 331002651 id="United States of America" data-value="USA"></div>
+                <div class="country box column is-one-fifth" population= 25499884 id="Australia" data-value="AUS"></div>
+                <div class="country box column is-one-fifth" population= 37742154 id="Canada" data-value="CAN"></div>
+                <div class="country box column is-one-fifth" population= 65273511 id="France" data-value="FRA"></div>
+                <div class="country box column is-one-fifth" population= 67886011 id="United Kingdom" data-value="GBR"></div>
             </div>
         </section>
     </div>
@@ -283,14 +283,16 @@
 
                     // var totalConfirmed = $("<p></p>").text(`${countryName} total case : ${response.stringencyData.confirmed}.`);
                     // var totalDeath = $("<p></p>").text(`${countryName} total death : ${response.stringencyData.death}.`);
-                    var totalConfirmed = $("<p></p>").text(`Total case : ${response.stringencyData.confirmed}.`);
-                    var totalPer10k = $("<p></p>").text(`Total case : ${response.stringencyData.confirmed}.`);
-                    var totalDeath = $("<p></p>").text(`Total death : ${response.stringencyData.deaths}.`);
-                    var totalDeathPer10K = $("<p></p>").text(`Total death : ${response.stringencyData.death}.`);
+                    var totalConfirmed = $("<p></p>").text(`Total case: ${response.stringencyData.confirmed}`);
+                    var totalPer10k = $("<p></p>").text(`Cases per 10k: ${(response.stringencyData.confirmed /element.attr("population")*10000).toFixed(0)}`);
+                    var totalDeath = $("<p></p>").text(`Total death: ${response.stringencyData.deaths}`);
+                    var totalDeathPer10K = $("<p></p>").text(`Death per 10k: ${(response.stringencyData.deaths /element.attr("population")*10000).toFixed(2)}`);
 
                     element.append($("<h1>").text(countryName + ":"));
                     element.append(totalConfirmed);
                     element.append(totalDeath);
+                    element.append(totalPer10k);
+                    element.append(totalDeathPer10K);
 
                     element.append($("<br>"));
 
