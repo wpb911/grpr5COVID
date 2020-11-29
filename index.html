@@ -5,17 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <title>COVID Data</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <title>COVID-19 Stats</title>
 </head>
 
 <body>
-    <div class="container">
-    <section id="search-section" class="section">
-      <div class="container">
-      <form id="covid-form"></form>
-          <label for="name">Search for a State: </label><br>
+  <div id="container-wrapper" class="container">
+    <div id="top-container" class="container">
+        <h1 class="title">COVID-19 Statistics</h1>
+    </div>
+    <div id="content-container" class="container">
+     <section id="search-section" class="section">    
+      <form id="covid-form">
+        <div class="field">
+          <label class="label" for="name">Select a State: </label>
           <!--States drop down-->
-          <select id='states'>
+          <select class="select" id='states' autofocus>
               <option value="AK">Alaska</option>
               <option value="AL">Alabama</option>
               <option value="AR">Arkansas</option>
@@ -71,46 +76,44 @@
               <option value="WV">West Virgina</option>
               <option value="WY">Wyoming</option>
                </select>
-    
-            <!--<input id="state-input" type="text" name="State" placeholder="Enter 2 letters" > --> 
-            <link rel="stylesheet" href="style.css"></link>
-            <input id="add-state" type="submit" value="Search">
+            <input class="button" id="add-state" type="submit" value="Search">
+        </div>
         </form>
-            </div>
+        
         </section>
 
         <section id="state-section" class="section">
-            <div class="columns">
-                <div class="column box">
+            <div id="state-section-columns" class="columns box">
+                <div class="column">
                 <!-- Retrieved data will be dumped here -->
-                <div class="date"></div>
-                <div class="state"></div>
-                <div class="positive"></div>
-                <div class="death"></div>
-                <div class="positiveIncrease"></div>
-                <div class="active"></div>
-                <div class="recovered"></div>
+                    <div class="date"></div>
+                    <div class="state"></div>
+                    <div class="positive"></div>
+                    <div class="death"></div>
+                    <div class="positiveIncrease"></div>
+                    <div class="active"></div>
+                    <div class="recovered"></div>
+                </div>
             </div>
         </section>
         <section id="world-section" class="section">
-           
-            <div class="columns">
+           <h3 id="world-subtitle" class="subtitle">Countries with highest infection rates</h3>
+            <div id="word-section-columns" class="columns">
                 <!-- HTML for the "COUNTRY data" part of the page goes here -->
                 <!-- for the world -->
                 <!-- <div id = "worldData"></div> -->
-                <div class="country box column is-one-fifth" population= 331002651 id="United States of America" data-value="USA"></div>
-                <div class="country box column is-one-fifth" population= 25499884 id="Australia" data-value="AUS"></div>
-                <div class="country box column is-one-fifth" population= 37742154 id="Canada" data-value="CAN"></div>
-                <div class="country box column is-one-fifth" population= 65273511 id="France" data-value="FRA"></div>
-                <div class="country box column is-one-fifth" population= 67886011 id="United Kingdom" data-value="GBR"></div>
+                <div class="country box column" population= 331002651 id="United States" data-value="USA"></div>
+                <div class="country box column" population= 25499884 id="Australia" data-value="AUS"></div>
+                <div class="country box column" population= 37742154 id="Canada" data-value="CAN"></div>
+                <div class="country box column" population= 65273511 id="France" data-value="FRA"></div>
+                <div class="country box column" population= 67886011 id="United Kingdom" data-value="GBR"></div>
             </div>
         </section>
     </div>
-
+    </div>
     <!-- Load jQuery and Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
     <script type="text/javascript">
 
         $( window ).on( "load", firstCovid );
@@ -135,12 +138,12 @@
 
                 var activekeep = parseInt(response.positive) - parseInt(response.recovered) - parseInt(response.death);
                 console.log("ActiveKeep = " + activekeep);
-                $(".state").html("<h1>" + response.state + " COVID Details " + response.date + "</h1>");
-                $(".positive").text("Total Cases: " + response.positive);
-                $(".death").text("Total Deaths: " + response.death);
-                $(".positiveIncrease").text("New Cases: " + response.positiveIncrease);
-                $(".active").text("Active Cases: " + activekeep);
-                $(".recovered").text("Recovered: " + response.recovered);
+                $(".state").html("<h1 id='state-heading'>" + response.state + " COVID Details " + response.date + "</h1>");
+                $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b> " + response.positive + "</span> <hr class='seperator'>");
+                $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b> " + response.death + "</span> <hr class='seperator'>");
+                $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + response.positiveIncrease + "</span> <hr class='seperator'>");
+                $(".active").html("<span class='covid-fact'> <b>Active Cases: </b>" + activekeep + "</span> <hr class='seperator'>");
+                $(".recovered").html("<span class='covid-fact'> <b>Recovered: </b>" + response.recovered + "</span>");
                 
             });
 
@@ -172,12 +175,12 @@
 
                 var activekeep = parseInt(response.positive) - parseInt(response.recovered) - parseInt(response.death);
                 console.log("ActiveKeep = " + activekeep);
-                $(".state").html("<h1>" + response.state + " COVID Details " + response.date + "</h1>");
-                $(".positive").text("Total Cases: " + response.positive);
-                $(".death").text("Total Deaths: " + response.death);
-                $(".positiveIncrease").text("New Cases: " + response.positiveIncrease);
-                $(".active").text("Active Cases: " + activekeep);
-                $(".recovered").text("Recovered: " + response.recovered);
+                $(".state").html("<h1>" + response.state + " COVID Details </b>" + response.date + "</h1>");
+                $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b>" + response.positive + "</span> <hr class='seperator'>");
+                $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + response.death + "</span> <hr class='seperator'>");
+                $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + response.positiveIncrease + "</span> <hr class='seperator'>");
+                $(".active").html("<span class='covid-fact'> <b>Active Cases: </b>" + activekeep + "</span> <hr class='seperator'>");
+                $(".recovered").html("<span class='covid-fact'> <b>Recovered: </b>" + response.recovered + "</span> <hr class='seperator'>");
 
                 // Log the queryURL
                 console.log(queryURL);
@@ -199,10 +202,10 @@
             return currentDate;
         }
         var currentDate = returnDate();
-        var countries = ["United States of America", "Australia", "Canada", "France", "United Kingdom"]
+        var countries = ["United States", "Australia", "Canada", "France", "United Kingdom"]
         var countryPopulation = [
             {
-            country: "United States of America",
+            country: "United States",
             population: 331002651,
             code:"USA"
         },
@@ -283,12 +286,12 @@
 
                     // var totalConfirmed = $("<p></p>").text(`${countryName} total case : ${response.stringencyData.confirmed}.`);
                     // var totalDeath = $("<p></p>").text(`${countryName} total death : ${response.stringencyData.death}.`);
-                    var totalConfirmed = $("<p></p>").text(`Total case: ${response.stringencyData.confirmed}`);
-                    var totalPer10k = $("<p></p>").text(`Cases per 10k: ${(response.stringencyData.confirmed /element.attr("population")*10000).toFixed(0)}`);
-                    var totalDeath = $("<p></p>").text(`Total death: ${response.stringencyData.deaths}`);
-                    var totalDeathPer10K = $("<p></p>").text(`Death per 10k: ${(response.stringencyData.deaths /element.attr("population")*10000).toFixed(2)}`);
-
-                    element.append($("<h1>").text(countryName + ":"));
+                    var totalConfirmed = $("<p></p>").html(`<div class='world-fact'><b>Total cases:</b><br> &nbsp; ${response.stringencyData.confirmed}</div><hr class="sep">`);
+                    var totalPer10k = $("<p></p>").html(`<div class='world-fact'><b>Cases per 10,000:</b><br> &nbsp; ${(response.stringencyData.confirmed /element.attr("population")*10000).toFixed(0)}</div><hr class="sep">`);
+                    var totalDeath = $("<p></p>").html(`<div class='world-fact'><b>Total deaths:</b><br> &nbsp; ${response.stringencyData.deaths}</div><hr class="sep">`);
+                    var totalDeathPer10K = $("<p></p>").html(`<div class='world-fact'><b>Deaths per 10,000:</b><br> &nbsp; ${(response.stringencyData.deaths /element.attr("population")*10000).toFixed(2)}</div>`);
+                            console.log(totalDeathPer10K);
+                    element.append($("<h1>").text(countryName));
                     element.append(totalConfirmed);
                     element.append(totalDeath);
                     element.append(totalPer10k);
@@ -311,7 +314,7 @@
     </script>
 
 
-
+    <link rel="stylesheet" href="style.css"></link>
 </body>
 
 </html>
