@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="icon" type="image/png" href="icon.png">
-    <title>COVID-19 Stats</title>
+    <title>COVID-19 Daily Stats</title>
 </head>
 
 <body>
@@ -69,7 +69,7 @@
               <option value="TX">Texas</option>
               <option value="UT">Utah</option>
               <option value="VA">Virgina</option>
-              <option value="VI">Virgina Islands</option>
+              <option value="VI">Virgin Islands</option>
               <option value="VT">Vermont</option>
               <option value="WA">Washington</option>
               <option value="WI">Wisconsin</option>
@@ -97,7 +97,7 @@
             </div>
         </section>
         <section id="world-section" class="section">
-           <h3 id="world-subtitle" class="subtitle">Countries with highest infection rates</h3>
+           <h3 id="world-subtitle" class="subtitle">Countries with highest infection rates:</h3>
             <div id="word-section-columns" class="columns">
                 <!-- HTML for the "COUNTRY data" part of the page goes here -->
                 <!-- for the world -->
@@ -135,10 +135,14 @@
                 url: queryURL,
                 method: "GET"
             }).then(function (response) {
-
+               
                 var activekeep = parseInt(response.positive) - parseInt(response.recovered) - parseInt(response.death);
                 console.log("ActiveKeep = " + activekeep);
-                $(".state").html("<h1 id='state-heading'>" + response.state + " COVID Details " + response.date + "</h1>");
+
+                $(".state").html("<h1>" + response.state + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
+                //for some reason the commented line below will not allow centering of the state information but the one above does 
+                //$(".state").html("<h1 id='state-heading'>" + response.state + " COVID-19 Details " + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
+
                 $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b> " + response.positive + "</span> <hr class='seperator'>");
                 $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b> " + response.death + "</span> <hr class='seperator'>");
                 $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + response.positiveIncrease + "</span> <hr class='seperator'>");
@@ -172,10 +176,12 @@
                 url: queryURL,
                 method: "GET"
             }).then(function (response) {
-
+                console.log(response);
                 var activekeep = parseInt(response.positive) - parseInt(response.recovered) - parseInt(response.death);
                 console.log("ActiveKeep = " + activekeep);
-                $(".state").html("<h1>" + response.state + " COVID Details </b>" + response.date + "</h1>");
+                // same centering issue with one allowing centering (uncommented) and one not allowing centering (commented out)
+                //$(".state").html("<h1 id='state-heading'>" + response.state + " COVID-19 Details " + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
+                $(".state").html("<h1>" + response.state + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
                 $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b>" + response.positive + "</span> <hr class='seperator'>");
                 $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + response.death + "</span> <hr class='seperator'>");
                 $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + response.positiveIncrease + "</span> <hr class='seperator'>");
