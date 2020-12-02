@@ -110,6 +110,16 @@
             </div>
         </section>
     </div>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>COVID-19 Daily Stats</strong> by <a href="https://github.com/wpb911/grpr5COVID">Group 5</a>.Copyright
+            
+          </p>
+        </div>
+      </footer>
+      
     </div>
     <!-- Load jQuery and Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -196,18 +206,7 @@
 
 
         // World part
-        console.log(moment().format());
-        function returnDate() {
-            // var codeObject = {""}
-
-            var dateString = moment().format();
-            var currentDate = "";
-            for (let i = 0; i < dateString.indexOf("T"); i++) {
-                currentDate += dateString[i];
-            }
-            return currentDate;
-        }
-        var currentDate = returnDate();
+        var currentDate = moment().subtract(1,'day').format("MM-DD-YYYY");
         var countries = ["United States", "Australia", "Canada", "France", "United Kingdom"]
         var countryPopulation = [
             {
@@ -292,10 +291,10 @@
 
                     // var totalConfirmed = $("<p></p>").text(`${countryName} total case : ${response.stringencyData.confirmed}.`);
                     // var totalDeath = $("<p></p>").text(`${countryName} total death : ${response.stringencyData.death}.`);
-                    var totalConfirmed = $("<p></p>").html(`<div class='world-fact'><b>Total cases:</b><br> &nbsp; ${response.stringencyData.confirmed}</div><hr class="sep">`);
-                    var totalPer10k = $("<p></p>").html(`<div class='world-fact'><b>Cases per 10,000:</b><br> &nbsp; ${(response.stringencyData.confirmed /element.attr("population")*10000).toFixed(0)}</div><hr class="sep">`);
-                    var totalDeath = $("<p></p>").html(`<div class='world-fact'><b>Total deaths:</b><br> &nbsp; ${response.stringencyData.deaths}</div><hr class="sep">`);
-                    var totalDeathPer10K = $("<p></p>").html(`<div class='world-fact'><b>Deaths per 10,000:</b><br> &nbsp; ${(response.stringencyData.deaths /element.attr("population")*10000).toFixed(2)}</div>`);
+                    var totalConfirmed = $("<p></p>").html(`<div class='world-fact'><b>Total cases:</b><br> &nbsp; ${(response.stringencyData.confirmed).toLocaleString()}</div><hr class="sep">`);
+                    var totalPer10k = $("<p></p>").html(`<div class='world-fact'><b>Cases per 10,000:</b><br> &nbsp; ${((response.stringencyData.confirmed /element.attr("population")*10000).toFixed(0)).toLocaleString()}</div><hr class="sep">`);
+                    var totalDeath = $("<p></p>").html(`<div class='world-fact'><b>Total deaths:</b><br> &nbsp; ${(response.stringencyData.deaths).toLocaleString()}</div><hr class="sep">`);
+                    var totalDeathPer10K = $("<p></p>").html(`<div class='world-fact'><b>Deaths per 10,000:</b><br> &nbsp; ${((response.stringencyData.deaths /element.attr("population")*10000).toFixed(2)).toLocaleString()}</div>`);
                             console.log(totalDeathPer10K);
                     element.append($("<h1>").text(countryName));
                     element.append(totalConfirmed);
