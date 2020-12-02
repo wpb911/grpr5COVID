@@ -137,7 +137,9 @@
             //if there is a stored state use it to update the initial state 
             if (stateStore !== null) {
                 stateInput = stateStore;
-            };
+            }
+            //sets drop down to recent chosen state
+            $("#states").val(stateInput)
             //Call covidtracking.com API with the State selected by the user 
             var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput + "/current.json";
 
