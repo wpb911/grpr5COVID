@@ -24,7 +24,6 @@
               <option value="AK">Alaska</option>
               <option value="AL">Alabama</option>
               <option value="AR">Arkansas</option>
-              <option value="AS">Alaska</option>
               <option value="AZ">Arizona</option>
               <option value="CA">California</option>
               <option value="CO">Colorado</option>
@@ -61,9 +60,11 @@
               <option value="OH">Ohio</option>
               <option value="OK">Oklahoma</option>
               <option value="OR">Oregon</option>
+              <option value="PR">Puerto Rico</option>
               <option value="PA">Pennsylvania</option>
               <option value="RI">Rhode Island</option>
               <option value="SC">South Carolina</option>
+              <option value="AS">Samoa</option>
               <option value="SD">South Dakota</option>
               <option value="TN">Tennessee</option>
               <option value="TX">Texas</option>
@@ -126,9 +127,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type="text/javascript">
 
+
+        // jQuery initial setup of application 
         $( window ).on( "load", firstCovid );
         
-
+        // firstCovid() loads once on load of the program to set intial setting for the application
+        //sets Ohio as the first state if no saved data and sets the drop down to match
+        //if saved data exists it retrieves it and sets the drop down accordingly and displays the matching state data 
         function firstCovid() {
             //set intial state to Ohio
             let stateInput = "OH";
@@ -138,23 +143,25 @@
             if (stateStore !== null) {
                 stateInput = stateStore;
             }
-            //sets drop down to recent chosen state
-            $("#states").val(stateInput)
-            //Call covidtracking.com API with the State selected by the user 
+            //sets drop down selection to most recent chosen state
+            $("#states").val(stateInput);
+
+            //retrieves selected state name for current selection
+            let stName = $("#states option:selected").text();
+            console.log("State Name from jQuery " + stName);
+
+            //Call covidtracking.com API with the State selected by the user from the drop down 
             var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput + "/current.json";
 
             $.ajax({
                 url: queryURL,
                 method: "GET"
             }).then(function (response) {
-               
+                console.log("response value: ", response);
                 var activekeep = parseInt(response.positive) - parseInt(response.recovered) - parseInt(response.death);
                 console.log("ActiveKeep = " + activekeep);
 
-                //$(".state").html("<h1>" + response.state + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
-                //for some reason the commented line below will not allow centering of the state information but the one above does 
-                //$(".state").html("<h1 id='state-heading'>" + response.state + " COVID-19 Details " + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
-
+                //if data is not kept by the state display: Data not available message to user 
                 let prepareValue = function(val){
                     console.log("value: ", val);
                     if(!val){
@@ -167,13 +174,14 @@
                     }
                 }
                 let positiveValue = prepareValue(response.positive);
-
                 let activeValue = prepareValue(activekeep);
                 let deathValue = prepareValue(response.death);
                 let increaseValue = prepareValue(response.positiveIncrease);
                 let recoveredValue = prepareValue(response.recovered);
 
-                $(".state").html("<h1>" + response.state + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
+                console.log("Date Check from API: " + moment(response.dateChecked).format("MM/DD/YYYY"));
+
+                $(".state").html("<h1>" + stName + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
                 $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b>" + positiveValue.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + deathValue.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + increaseValue.toLocaleString() + "</span> <hr class='seperator'>");
@@ -184,7 +192,7 @@
 
         };
 
-        
+        //Onclick for choosing a state from the drop down menu 
         $("#add-state").on("click", function (event) {
             // event.preventDefault() prevents the form from trying to submit itself.
 
@@ -196,6 +204,9 @@
             
             //Store the last viewed State to localstorage
             localStorage.setItem("lastSelectedState", JSON.stringify(stateInput));
+
+            //retrieves selected state name for current selected option 
+            let stName = $("#states option:selected").text();
             
             //Call covidtracking.com API with the State selected by the user 
             var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput + "/current.json";
@@ -206,10 +217,9 @@
             }).then(function (response) {
                 console.log(response);
                 var activekeep = parseInt(response.positive) - parseInt(response.recovered) - parseInt(response.death);
-                console.log("ActiveKeep = " + activekeep);
-                // same centering issue with one allowing centering (uncommented) and one not allowing centering (commented out)
-                //$(".state").html("<h1 id='state-heading'>" + response.state + " COVID-19 Details " + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
-                
+                console.log("ActiveKeep = " + activekeep);                             
+
+                //if data is not kept by the state display "Data not available" message to user 
                 let prepareValue = function(val){
                     console.log("value: ", val);
                     if(!val){
@@ -221,14 +231,16 @@
                          return val; //.toLocaleString();
                     }
                 }
+                console.log("Date Check from API: " + moment(response.dateChecked).format("MM/DD/YYYY"));
+                
+                
                 let positiveValue = prepareValue(response.positive);
-
                 let activeValue = prepareValue(activekeep);
                 let deathValue = prepareValue(response.death);
                 let increaseValue = prepareValue(response.positiveIncrease);
                 let recoveredValue = prepareValue(response.recovered);
 
-                $(".state").html("<h1>" + response.state + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
+                $(".state").html("<h1>" + stName + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
                 $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b>" + positiveValue.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + deathValue.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + increaseValue.toLocaleString() + "</span> <hr class='seperator'>");
@@ -275,35 +287,6 @@
 
 
 
-        // var countryPopulation = {
-        //     country:
-        //     {
-        //     name:"United States of America",
-        //     population: 331002651,
-        //     code:"USA"
-        // },
-        //     {
-        //     country: "Australia",
-        //     population: 25499884,
-        //     code:"AUS"
-        // },
-        //     {
-        //     country: "Canada",
-        //     population: 37742154,
-        //     code:"CAN"
-        // },
-        //     {
-        //     country: "France",
-        //     population: 65273511,
-        //     code:"FRA"
-        // },
-        //     {
-        //     country: "United Kingdom",
-        //     population: 67886011,
-        //     code:"GBR"
-        // }
-        // };
-        // var countryObject = [{ "Australia": "AUS" },]
         console.log(currentDate)
 
 
