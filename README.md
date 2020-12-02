@@ -3,6 +3,7 @@ Application that allows a user to see most recent Covid-19 stats for both a spec
 
 Covid-19 Details include:
 * State
+* Country
 * Date
 * Total Cases
 * Total Deaths
@@ -22,16 +23,17 @@ Covid-19 Details include:
 
 ## Usage
 
+ Using jQuery, CSS, Bulma, and HTML along with the Moment.js time library, we was able to create an application that is dynamic as one enters the city desired. API calls to covidtracking.com and Coronavirus Government Response Tracker for up to date info.
 
-![Covid-Tracker Image](https://github.com/wpb911/grpr5COVID/blob/main/image.png)
+![COVID-19 Daily Stats Image](https://github.com/wpb911/grpr5COVID/blob/main/image.png)
 
-Preview of the site is available here [Covid-Tracker](https://wpb911.github.io/grpr5COVID/).
+Preview of the site is available here [COVID-19 Daily Stats](https://wpb911.github.io/grpr5COVID/).
 
 
 ## Installation
 
-1.) Download the grpr5Covid repository
+1.) Download the COVID-19 Daily Stats repository
 2.) Run index.html
 
 ## License
-[Creative Commons] (https://wpb911/grpr5COVID/blob/main/LICENSE)
+[Creative Commons] (https://github.com/wpb911/grpr5COVID/blob/main/LICENSE)
