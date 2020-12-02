@@ -155,19 +155,42 @@
                 //for some reason the commented line below will not allow centering of the state information but the one above does 
                 //$(".state").html("<h1 id='state-heading'>" + response.state + " COVID-19 Details " + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
 
+                let prepareValue = function(val){
+                    console.log("value: ", val);
+                    if(!val){
+                        val = "Data not available"
+                        return val;
+                    }
+                    else{
+                        console.log("else value: ", val);
+                         return val; //.toLocaleString();
+                    }
+                }
+                let positiveValue = prepareValue(response.positive);
+
+                let activeValue = prepareValue(activekeep);
+                let deathValue = prepareValue(response.death);
+                let increaseValue = prepareValue(response.positiveIncrease);
+                let recoveredValue = prepareValue(response.recovered);
+
                 $(".state").html("<h1>" + response.state + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
+<<<<<<< HEAD
                 $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b>" + response.positive.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + response.death.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + response.positiveIncrease.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".active").html("<span class='covid-fact'> <b>Active Cases: </b>" + activekeep.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".recovered").html("<span class='covid-fact'> <b>Recovered: </b>" + response.recovered + "</span> <hr class='seperator'>");
+=======
+                $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b>" + positiveValue.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + deathValue.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + increaseValue.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".active").html("<span class='covid-fact'> <b>Active Cases: </b>" + activeValue.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".recovered").html("<span class='covid-fact'> <b>Recovered: </b>" + recoveredValue.toLocaleString() + "</span> <hr class='seperator'>");
+>>>>>>> fb384dc1545c4fa9f3bbb0140547e6566224af66
 
             });
 
         };
-
-
-
 
         
         $("#add-state").on("click", function (event) {
@@ -194,12 +217,31 @@
                 console.log("ActiveKeep = " + activekeep);
                 // same centering issue with one allowing centering (uncommented) and one not allowing centering (commented out)
                 //$(".state").html("<h1 id='state-heading'>" + response.state + " COVID-19 Details " + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
+                
+                let prepareValue = function(val){
+                    console.log("value: ", val);
+                    if(!val){
+                        val = "Data not available"
+                        return val;
+                    }
+                    else{
+                        console.log("else value: ", val);
+                         return val; //.toLocaleString();
+                    }
+                }
+                let positiveValue = prepareValue(response.positive);
+
+                let activeValue = prepareValue(activekeep);
+                let deathValue = prepareValue(response.death);
+                let increaseValue = prepareValue(response.positiveIncrease);
+                let recoveredValue = prepareValue(response.recovered);
+
                 $(".state").html("<h1>" + response.state + " COVID-19 Details </b>" + moment(response.dateChecked).format("MM/DD/YYYY") + "</h1>");
-                $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b>" + response.positive.toLocaleString() + "</span> <hr class='seperator'>");
-                $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + response.death.toLocaleString() + "</span> <hr class='seperator'>");
-                $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + response.positiveIncrease.toLocaleString() + "</span> <hr class='seperator'>");
-                $(".active").html("<span class='covid-fact'> <b>Active Cases: </b>" + activekeep.toLocaleString() + "</span> <hr class='seperator'>");
-                $(".recovered").html("<span class='covid-fact'> <b>Recovered: </b>" + response.recovered.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".positive").html("<span class='covid-fact'> <b>Total Cases: </b>" + positiveValue.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + deathValue.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + increaseValue.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".active").html("<span class='covid-fact'> <b>Active Cases: </b>" + activeValue.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".recovered").html("<span class='covid-fact'> <b>Recovered: </b>" + recoveredValue.toLocaleString() + "</span> <hr class='seperator'>");
 
                 // Log the queryURL
                 
