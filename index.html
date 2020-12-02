@@ -137,7 +137,9 @@
             //if there is a stored state use it to update the initial state 
             if (stateStore !== null) {
                 stateInput = stateStore;
-            };
+            }
+            //sets drop down to recent chosen state
+            $("#states").val(stateInput)
             //Call covidtracking.com API with the State selected by the user 
             var queryURL = "https://api.covidtracking.com/v1/states/" + stateInput + "/current.json";
 
@@ -158,7 +160,7 @@
                 $(".death").html("<span class='covid-fact'> <b>Total Deaths: </b>" + response.death.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".positiveIncrease").html("<span class='covid-fact'> <b>New Cases: </b>" + response.positiveIncrease.toLocaleString() + "</span> <hr class='seperator'>");
                 $(".active").html("<span class='covid-fact'> <b>Active Cases: </b>" + activekeep.toLocaleString() + "</span> <hr class='seperator'>");
-                $(".recovered").html("<span class='covid-fact'> <b>Recovered: </b>" + response.recovered.toLocaleString() + "</span> <hr class='seperator'>");
+                $(".recovered").html("<span class='covid-fact'> <b>Recovered: </b>" + response.recovered + "</span> <hr class='seperator'>");
 
             });
 
