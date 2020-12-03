@@ -103,11 +103,11 @@
                 <!-- HTML for the "COUNTRY data" part of the page goes here -->
                 <!-- for the world -->
                 <!-- <div id = "worldData"></div> -->
-                <div class="country box column" data-population= 331002651 id="United States" data-value="USA"></div>
-                <div class="country box column" data-population= 25499884 id="Australia" data-value="AUS"></div>
-                <div class="country box column" data-population= 37742154 id="Canada" data-value="CAN"></div>
-                <div class="country box column" data-population= 65273511 id="France" data-value="FRA"></div>
-                <div class="country box column" data-population= 67886011 id="United Kingdom" data-value="GBR"></div>
+                <div class="country box column" data-population= 331002651 data-name="United States" data-value="USA"></div>
+                <div class="country box column" data-population= 25499884 data-name="Australia" data-value="AUS"></div>
+                <div class="country box column" data-population= 37742154 data-name="Canada" data-value="CAN"></div>
+                <div class="country box column" data-population= 65273511 data-name="France" data-value="FRA"></div>
+                <div class="country box column" data-population= 67886011 data-name="United Kingdom" data-value="GBR"></div>
             </div>
         </section>
     </div>
@@ -297,7 +297,7 @@
                 var element = $(this);
                 // console.log(this)
                 var countryCode = element.attr("data-value");
-                var countryName = element.attr("ID");
+                var countryName = element.data("name");
                 console.log(countryName);
                 var queryURl = "https://covidtrackerapi.bsg.ox.ac.uk/api/v2/stringency/actions/" + countryCode + "/" + currentDate;
 
