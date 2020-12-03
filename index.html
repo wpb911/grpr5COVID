@@ -77,7 +77,7 @@
               <option value="WV">West Virgina</option>
               <option value="WY">Wyoming</option>
                </select>
-            <input class="button" id="add-state" type="submit" value="Search">
+           <!-- This commented-out input not needed if select runs on change event.  <input class="button" id="add-state" type="submit" value="Search"> -->
         </div>
         </form>
         
@@ -193,7 +193,7 @@
         };
 
         //Onclick for choosing a state from the drop down menu 
-        $("#add-state").on("click", function (event) {
+        $("#states").on("change", function (event) {
             // event.preventDefault() prevents the form from trying to submit itself.
 
             event.preventDefault();
