@@ -18,7 +18,7 @@
      <section id="search-section" class="section">    
       <form id="covid-form">
         <div class="field">
-          <label class="label" for="name">Select a State: </label>
+          <label class="label" for="states">Select a State: </label>
           <!--States drop down-->
           <select class="select" id='states' autofocus>
               <option value="AK">Alaska</option>
@@ -103,11 +103,11 @@
                 <!-- HTML for the "COUNTRY data" part of the page goes here -->
                 <!-- for the world -->
                 <!-- <div id = "worldData"></div> -->
-                <div class="country box column" population= 331002651 id="United States" data-value="USA"></div>
-                <div class="country box column" population= 25499884 id="Australia" data-value="AUS"></div>
-                <div class="country box column" population= 37742154 id="Canada" data-value="CAN"></div>
-                <div class="country box column" population= 65273511 id="France" data-value="FRA"></div>
-                <div class="country box column" population= 67886011 id="United Kingdom" data-value="GBR"></div>
+                <div class="country box column" data-population= 331002651 id="United States" data-value="USA"></div>
+                <div class="country box column" data-population= 25499884 id="Australia" data-value="AUS"></div>
+                <div class="country box column" data-population= 37742154 id="Canada" data-value="CAN"></div>
+                <div class="country box column" data-population= 65273511 id="France" data-value="FRA"></div>
+                <div class="country box column" data-population= 67886011 id="United Kingdom" data-value="GBR"></div>
             </div>
         </section>
     </div>
@@ -312,9 +312,9 @@
                     // var totalConfirmed = $("<p></p>").text(`${countryName} total case : ${response.stringencyData.confirmed}.`);
                     // var totalDeath = $("<p></p>").text(`${countryName} total death : ${response.stringencyData.death}.`);
                     var totalConfirmed = $("<p></p>").html(`<div class='world-fact'><b>Total cases:</b><br> &nbsp; ${(response.stringencyData.confirmed).toLocaleString()}</div><hr class="sep">`);
-                    var totalPer10k = $("<p></p>").html(`<div class='world-fact'><b>Cases per 10,000:</b><br> &nbsp; ${((response.stringencyData.confirmed /element.attr("population")*10000).toFixed(0)).toLocaleString()}</div><hr class="sep">`);
+                    var totalPer10k = $("<p></p>").html(`<div class='world-fact'><b>Cases per 10,000:</b><br> &nbsp; ${((response.stringencyData.confirmed /element.data("population")*10000).toFixed(0)).toLocaleString()}</div><hr class="sep">`);
                     var totalDeath = $("<p></p>").html(`<div class='world-fact'><b>Total deaths:</b><br> &nbsp; ${(response.stringencyData.deaths).toLocaleString()}</div><hr class="sep">`);
-                    var totalDeathPer10K = $("<p></p>").html(`<div class='world-fact'><b>Deaths per 10,000:</b><br> &nbsp; ${((response.stringencyData.deaths /element.attr("population")*10000).toFixed(2)).toLocaleString()}</div>`);
+                    var totalDeathPer10K = $("<p></p>").html(`<div class='world-fact'><b>Deaths per 10,000:</b><br> &nbsp; ${((response.stringencyData.deaths /element.data("population")*10000).toFixed(2)).toLocaleString()}</div>`);
                             console.log(totalDeathPer10K);
                     element.append($("<h1>").text(countryName));
                     element.append(totalConfirmed);
